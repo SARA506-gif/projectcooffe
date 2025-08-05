@@ -1,0 +1,221 @@
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عنبر - محمصة وقهوة مختصة</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header img {
+            height: 50px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 20px;
+        }
+
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #fded00;
+        }
+
+        .main-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-top: 50px;
+            color: #0b4931;
+        }
+
+        /* الكرت المستطيل عن "عنبر" */
+        .amber-card {
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .amber-card img {
+            width: 45%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .amber-card .content {
+            width: 50%;
+            padding-left: 20px;
+        }
+
+        .amber-card h2 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #0b4931;
+        }
+
+        .amber-card p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* تنسيق كروت المنتجات وطريقة التحضير */
+        .cards-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .card {
+            width: 48%;
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px;
+        }
+
+        .card-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            color: #0b4931;
+        }
+
+        .card-content p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            color: #333;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #e4b20f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #e4b20f;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div>
+            <img src="1.1.1.jpg" alt="شعار عنبر">
+        </div> 
+         <nav>
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="d.html">المنتجات</a></li>
+            <li><a href="W.HTML">طريقه التحضير</a></li>
+            <li><a href="HOME.html">المشروع الاول</a></li>
+        </ul>
+    </nav>
+    </header>
+
+    <h1 class="main-title">عنبر - محمصة وقهوة مختصة</h1>
+
+    <!-- كرت مستطيل عن "عنبر" -->
+    <div class="amber-card">
+        <img src="7.jpg" alt="عنبر - محمصة وقهوة مختصة" />
+        <div class="content">
+            <h2>عنبر - محمصة وقهوة مختصة</h2>
+            <p>نحن في "عنبر" نقدم لك تجربة فريدة من نوعها مع قهوتنا المختصة. من خلال استخدام أفضل الحبوب المحلية والعالمية، نقوم بتحميصها بعناية لتقديم كوب قهوة غني ونكهة استثنائية. سواء كنت من محبي القهوة العربية أو العالمية، لدينا ما يناسب ذوقك.</p>
+        </div>
+    </div>
+
+    <!-- كروت المنتجات وطريقة التحضير -->
+    <section class="cards-container">
+        <!-- كرت المنتجات -->
+        <div class="card">
+            <a href="d.HTML" style="display: block; text-decoration: none;"> <!-- رابط يغطي الكرت بالكامل -->
+                <img src="23.jpg" alt="منتجاتنا" />
+                <div class="card-content">
+                    <h2>منتجاتنا</h2>
+                    <p>نحن نستخدم أفضل تقنيات التحميص لضمان تقديم قهوة طازجة ونكهة مميزة، نعرض لك مجموعة متنوعة من القهوة المناسبة لجميع الأذواق.</p>
+                </div>
+            </a>
+        </div>
+
+        <!-- كرت طريقة التحضير -->
+        <div class="card">
+            <a href="W.HTML" style="display: block; text-decoration: none;"> <!-- رابط يغطي الكرت بالكامل -->
+                <img src="6.jpg" alt="طريقة تحضير القهوة" />
+                <div class="card-content">
+                    <h2>طريقة التحضير</h2>
+                    <p>نحن نقدم لك نصائح وتحضيرات خاصة لتحضير القهوة التي تحبها بالطريقة المثلى. تعلم معنا أسرار تحضير فنجان القهوة المثالي.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <p>تواصل معنا: <a href="tel:+966504157670">+966504157670</a></p>
+        <p>البريد الإلكتروني: <a href="mailto:amber@amber.com.sa">amber@amber.com.sa</a></p>
+    </footer>
+</body>
+</html>

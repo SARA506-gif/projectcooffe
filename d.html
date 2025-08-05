@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>منتجاتنا</title>
+    <style>
+        /* الكود السابق للستايل */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        header img {
+            height: 50px;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul li a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        nav ul li a:hover {
+            color: #fded00;
+        }
+        .main-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-top: 50px;
+            color: #0b4931;
+        }
+        .products {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+            margin-top: 50px;
+            padding: 0 20px;
+        }
+        .product {
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 48%;
+            transition: transform 0.3s ease;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        .product h2 {
+            font-size: 1.8rem;
+            color: #136d11;
+            margin: 15px 0;
+            text-align: center;
+        }
+        .product p {
+            font-size: 1.1rem;
+            color: #666;
+            text-align: center;
+            padding: 0 15px;
+        }
+        .product button {
+            display: block;
+            margin: 15px auto;
+            padding: 10px 20px;
+            background-color: #115a20;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .product button:hover {
+            background-color: #163a06;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            color: #333;
+            margin-top: 50px;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+        footer a {
+            color: #e4b20f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        footer a:hover {
+            color: #e4b20f;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <img src="1.1.1.jpg" alt="شعار عنبر" />
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="d.html">المنتجات</a></li>
+            <li><a href="W.HTML">طريقه التحضير</a></li>
+            <li><a href="HOME.html">المشروع الاول</a></li>
+ 
+
+
+        </ul>
+    </nav>
+</header>
+ 
+<div style="text-align:center; margin: 40px;">
+    <h2>اسأل عن محصول القهوة</h2>
+    <input
+        type="text"
+        id="coffeeInput"
+        placeholder="اكتب اسم المحصول هنا"
+        style="padding: 10px; width: 300px; font-size: 1rem"
+    />
+    <button onclick="askAI()" style="padding: 10px 20px; font-size: 1rem; cursor:pointer; margin-left:10px;">
+        اسأل
+    </button>
+    <p id="aiResponse" style="margin-top: 20px; font-size: 1.2rem; color: #136d11;"></p>
+</div>
+
+<script>
+    const coffeeData = {
+        "بينك بوربون": "قهوة بينك بوربون من كولومبيا، معروفة بطعمها الفاكهي والحموضة المتوسطة.",
+        "عنبر جيشا": "قهوة عنبر جيشا من كولومبيا، نوع مميز بنكهة معقدة وزهرية.",
+        "هاماشو": "قهوة هاماشو من إثيوبيا، بنكهة الفواكه المجففة وعطرية جداً.",
+        "سيدامو": "قهوة سيدامو من إثيوبيا، تتميز بطعمها النقي والزهري مع حموضة معتدلة.",
+        "بكج التوفير": "باقة توفر مجموعة مختارة من محاصيل القهوة بأسعار مناسبة.",
+        "كارمو": "قهوة كارمو من البرازيل، تتميز بنكهة شوكولاتة ومذاق ناعم.",
+    };
+
+    function similarity(s1, s2) {
+        s1 = s1.toLowerCase();
+        s2 = s2.toLowerCase();
+        if (s1 === s2) return 1;
+        if (s1.length === 0 || s2.length === 0) return 0;
+        let longer = s1.length > s2.length ? s1 : s2;
+        let shorter = s1.length > s2.length ? s2 : s1;
+        let longerLength = longer.length;
+        let sameCharCount = 0;
+        for (let i = 0; i < shorter.length; i++) {
+            if (longer.includes(shorter[i])) sameCharCount++;
+        }
+        return sameCharCount / longerLength;
+    }
+
+    function askAI() {
+        const input = document.getElementById("coffeeInput").value.trim();
+        const responseElement = document.getElementById("aiResponse");
+
+        if (!input) {
+            responseElement.textContent = "اكتب اسم محصول القهوة أولاً.";
+            return;
+        }
+
+        const keys = Object.keys(coffeeData);
+        
+        let exactMatch = keys.find((name) => name.toLowerCase() === input.toLowerCase());
+        if (exactMatch) {
+            responseElement.textContent = coffeeData[exactMatch];
+            return;
+        }
+
+        let bestMatch = null;
+        let bestScore = 0;
+        keys.forEach((name) => {
+            let score = similarity(input, name);
+            if (score > bestScore) {
+                bestScore = score;
+                bestMatch = name;
+            }
+        });
+
+        if (bestScore >= 0.5) {
+            responseElement.innerHTML = `هل تقصد <strong>${bestMatch}</strong>?<br> ${coffeeData[bestMatch]}`;
+        } else {
+            responseElement.textContent = "عذرًا، لم أجد معلومات عن هذا المحصول.";
+        }
+    }
+</script>
+
+<h1 class="main-title">منتجاتنا</h1>
+
+<div class="products" id="products">
+    <!-- Product 1 -->
+    <div class="product">
+        <img src="1.1.jpg" alt="بينك بوربون" />
+        <h2>بينك بوربون - كولومبيا</h2>
+        <p>سعر: 80 ر.س</p>
+        <button onclick="addToCart('بينك بوربون', 80)">أضف إلى السلة</button>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product">
+        <img src="1.2.1.jpg" alt="عنبر جيشا" />
+        <h2>عنبر جيشا - كولومبيا</h2>
+        <p>سعر: 90 ر.س</p>
+        <button onclick="addToCart('عنبر جيشا', 90)">أضف إلى السلة</button>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product">
+        <img src="02.jpg" alt="هاماشو" />
+        <h2>هاماشو - إثيوبيا</h2>
+        <p>سعر: 61 ر.س</p>
+        <button onclick="addToCart('هاماشو', 61)">أضف إلى السلة</button>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product">
+        <img src="03.jpg" alt="سيدامو" />
+        <h2>سيدامو - إثيوبيا</h2>
+        <p>سعر: 58 ر.س</p>
+        <button onclick="addToCart('سيدامو', 58)">أضف إلى السلة</button>
+    </div>
+
+    <!-- Product 5 -->
+    <div class="product">
+        <img src="000.jpg" alt="بكج التوفير" />
+        <h2>بكج التوفير</h2>
+        <p>سعر: 130 ر.س</p>
+        <button onclick="addToCart('بكج التوفير', 130)">أضف إلى السلة</button>
+    </div>
+
+    <!-- Product 6 -->
+    <div class="product">
+        <img src="66.jpg" alt="كارمو - البرازيل" />
+        <h2>كارمو - البرازيل</h2>
+        <p>سعر: 43 ر.س</p>
+        <button onclick="addToCart('كارمو', 43)">أضف إلى السلة</button>
+    </div>
+</div>
+
+<script>
+    function addToCart(productName, productPrice) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.push({ name: productName, price: productPrice });
+        localStorage.setItem("cart", JSON.stringify(cart));
+        alert(productName + " تمت إضافته إلى السلة بسعر " + productPrice + " ريال!");
+    }
+</script>
+
+</body>
+</html>

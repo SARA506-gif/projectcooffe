@@ -1,0 +1,173 @@
+<!DOCTYPE html>       
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سلة المشتريات | عنبر</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            padding: 20px;
+            font-size: 16px;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        header img {
+            height: 50px;
+        }
+
+        h1.main-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-top: 50px;
+            color: #0b4931;
+        }
+
+        .cart-container {
+            max-width: 800px;
+            margin: 40px auto;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .cart-item {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-item button {
+            background-color: #c0392b;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .cart-item button:hover {
+            background-color: #e74c3c;
+        }
+
+        .empty {
+            text-align: center;
+            font-size: 20px;
+            color: #999;
+            padding: 40px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #ffffff;
+            color: #333;
+            margin-top: 50px;
+        }
+
+        footer a {
+            color: #e4b20f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            color: #e4b20f;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <img src="1.1.1.jpg" alt="شعار عنبر">
+    </div>
+</header>
+
+<h1 class="main-title">سلة المشتريات</h1>
+
+<div class="cart-container">
+    <div id="cartItems"></div>
+</div>
+
+
+<script>
+function renderCart() {
+    const cartContainer = document.getElementById("cartItems");
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (cart.length === 0) {
+        cartContainer.innerHTML = '<div class="empty">🧺 سلتك فاضية</div>';
+        return;
+    }
+
+    let html = '';
+    cart.forEach((item, index) => {
+        html += `
+            <div class="cart-item">
+                🫖 ${item.name} - ${item.price} ريال
+                <button onclick="removeItem(${index})">🗑 حذف</button>
+            </div>
+        `;
+    });
+    cartContainer.innerHTML = html;
+}
+
+
+function removeItem(index) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    renderCart();
+}
+
+renderCart();
+</script>
+<div style="text-align:center; margin: 20px;">
+    <button onclick="showTotal()" style="padding: 10px 20px; font-size: 1rem; cursor:pointer;">
+        عرض إجمالي السلة
+    </button>
+    <p id="totalPrice" style="margin-top: 15px; font-size: 1.2rem; color: #136d11;"></p>
+</div>
+
+<script>
+    function showTotal() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        if (cart.length === 0) {
+            document.getElementById("totalPrice").textContent = "السلة فارغة.";
+            return;
+        }
+        let total = cart.reduce((sum, item) => sum + item.price, 0);
+        document.getElementById("totalPrice").textContent = "الإجمالي: " + total + " ريال";
+    }
+</script>
+<footer>
+    <p>تواصل معنا: <a href="tel:+966504157670">+966504157670</a></p>
+    <p>البريد الإلكتروني: <a href="mailto:amber@amber.com.sa">amber@amber.com.sa</a></p>
+</footer>
+</body>
+</html>
